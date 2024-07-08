@@ -22,38 +22,39 @@
 }
 
 .chat-box {
-  max-height: 500px;
+  height: 500px;
   padding: 1rem;
   background-color: #f9f9f9;
   font-weight: normal;
-  height: 100%;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  overflow-y: auto;
 }
 
-.message {
-  margin: 0.5rem 0;
+.message-row {
+  margin-bottom: 10px;
 }
 
 .message-content {
   padding: 10px;
   border-radius: 20px;
   display: inline-block;
-  max-width: 75%;
+  max-width: 70%;
   font-size: 1rem;
+}
+
+.user-message {
+  text-align: left;
 }
 
 .user-message .message-content {
   background-color: #e2f7cb;
-  align-self: flex-end;
+}
+
+.server-message {
   text-align: right;
 }
 
 .server-message .message-content {
   background-color: #cbe1fd;
-  align-self: flex-start;
-  text-align: left;
 }
 
 .input-box {
@@ -86,5 +87,10 @@
 }
 
 .chat-box::-webkit-scrollbar {
-  display: none;
+  width: 6px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 3px;
 }

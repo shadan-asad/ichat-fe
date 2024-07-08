@@ -1,6 +1,10 @@
-// chat.component.ts
-
-import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import {
+  AfterViewChecked,
+  Component,
+  ElementRef,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
 import { ChatService } from '../core/services/chat.service';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -13,10 +17,9 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent implements OnInit, AfterViewChecked {
-  loggedInUser: string | null = 'User123'; // Replace with actual logged-in user's username
-  messages: any[] = []; // Array to hold user messages
-  serverMessages: any[] = []; // Array to hold server messages
-  newMessage: string = ''; // Holds the new message from user input
+  loggedInUser: string | null = 'User123';
+  combinedMessages: any[] = [];
+  newMessage: string = '';
 
   @ViewChild('chatBox') private chatBoxContainer!: ElementRef;
 
@@ -34,9 +37,10 @@ export class ChatComponent implements OnInit, AfterViewChecked {
   fetchOlderMessages() {
     this.chatService.getOlderMessages().subscribe(
       (messages: any[]) => {
-        console.log('msgs: ', messages);
-        this.messages = messages;
-        this.serverMessages = messages;
+        this.combinedMessages = messages.flatMap((msg, index) => [
+          { message: msg.message, from: 'user' },
+          { message: msg.message, from: 'server' },
+        ]);
         setTimeout(() => this.scrollToBottom(), 0);
       },
       (error: any) => {
@@ -47,16 +51,19 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   sendMessage() {
     if (this.newMessage.trim() === '') {
-      return; // Don't send empty messages
+      return;
     }
 
-    // Send message to server
     this.chatService.sendMessage(this.newMessage).subscribe(
       (response: any) => {
-        this.messages.push({ message: this.newMessage, from: 'user' });
-        this.newMessage = ''; // Clear input field after sending
-
-        this.serverMessages.push(response.attributes.message);
+        console.log('chat res: ', response.data);
+        this.combinedMessages.push({ message: this.newMessage, from: 'user' });
+        this.combinedMessages.push({
+          message: response.data.attributes.message,
+          from: 'server',
+        });
+        this.newMessage = '';
+        setTimeout(() => this.scrollToBottom(), 0);
       },
       (error: any) => {
         console.error('Error sending message:', error);
@@ -70,7 +77,8 @@ export class ChatComponent implements OnInit, AfterViewChecked {
 
   private scrollToBottom(): void {
     try {
-      this.chatBoxContainer.nativeElement.scrollTop = this.chatBoxContainer.nativeElement.scrollHeight;
-    } catch(err) { }
+      this.chatBoxContainer.nativeElement.scrollTop =
+        this.chatBoxContainer.nativeElement.scrollHeight;
+    } catch (err) {}
   }
 }

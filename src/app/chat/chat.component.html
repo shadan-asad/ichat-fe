@@ -5,11 +5,13 @@
       <p>{{ loggedInUser }}</p>
     </div>
     <div class="card-body chat-box" #chatBox>
-      <div class="user-message" *ngFor="let message of messages">
-        <div class="message-content">{{ message.message }}</div>
-      </div>
-      <div class="server-message" *ngFor="let serverMessage of serverMessages">
-        <div class="message-content">{{ serverMessage.message }}</div>
+      <div *ngFor="let message of combinedMessages" class="message-row">
+        <div *ngIf="message.from === 'user'" class="user-message">
+          <div class="message-content">{{ message.message }}</div>
+        </div>
+        <div *ngIf="message.from === 'server'" class="server-message">
+          <div class="message-content">{{ message.message }}</div>
+        </div>
       </div>
     </div>
     <div class="card-footer input-box">
