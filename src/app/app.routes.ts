@@ -13,6 +13,6 @@ export const routes: Routes = [
     component: ChatComponent,
     canActivate: [AuthGuard],
   },
-  // Add other routes as needed
-  { path: '**', redirectTo: '/chat' }, // Redirect any unknown routes to chat (or handle as needed)
+
+  { path: '**', redirectTo: '/chat' },
 ];

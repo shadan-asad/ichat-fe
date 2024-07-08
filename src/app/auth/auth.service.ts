@@ -26,10 +26,8 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    // Implement your logic to check if the user is logged in
-    // Example: Check if token exists in localStorage
     if (typeof localStorage !== 'undefined') {
-      return !!localStorage.getItem('token'); // Adjust based on your actual authentication implementation
+      return !!localStorage.getItem('token');
     }
     return false;
   }

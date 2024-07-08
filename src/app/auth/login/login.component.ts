@@ -1,5 +1,3 @@
-// login.component.ts
-
 import { Component } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
@@ -27,11 +25,10 @@ export class LoginComponent {
         localStorage.setItem('token', data.jwt);
         localStorage.setItem('username', data.user.username);
         localStorage.setItem('userid', data.user.id);
-        // Redirect to chat component or dashboard
+
         this.router.navigate(['/chat']);
       },
       (error) => {
-        // Handle login error, e.g., display error message
         console.error('Login error:', error);
       }
     );

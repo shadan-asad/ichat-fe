@@ -1,5 +1,3 @@
-// chat.service.ts
-
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -8,11 +6,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ChatService {
-  private apiUrl = 'http://localhost:1337/api'; // Replace with your API URL
+  private apiUrl = 'http://localhost:1337/api';
 
   constructor(private http: HttpClient) {}
 
-  // Example method to send message to server
   sendMessage(newMessage: string): Observable<any> {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem('token'),
@@ -27,13 +24,12 @@ export class ChatService {
         message: newMessage,
         user: userId,
       },
-    }; // Adjust payload structure as per your API requirements
+    };
     return this.http.post<any>(`${this.apiUrl}/chats`, payload, {
       headers: headers,
     });
   }
 
-  // Example method to fetch older chat messages
   getOlderMessages(): Observable<any[]> {
     const headers = new HttpHeaders({
       Authorization: 'Bearer ' + localStorage.getItem('token'),
