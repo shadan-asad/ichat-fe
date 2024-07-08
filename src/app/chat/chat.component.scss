@@ -1,0 +1,90 @@
+.chat-container {
+  max-width: 800px;
+  margin: 0 auto;
+  margin-top: 1%;
+  font-family: "system-ui";
+  font-size: large;
+  font-weight: bolder;
+}
+
+.card {
+  border: none;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  background-color: #007bff;
+  color: #fff;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding: 1rem;
+}
+
+.chat-box {
+  max-height: 500px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  font-weight: normal;
+  height: 100%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.message {
+  margin: 0.5rem 0;
+}
+
+.message-content {
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+  max-width: 75%;
+  font-size: 1rem;
+}
+
+.user-message .message-content {
+  background-color: #e2f7cb;
+  align-self: flex-end;
+  text-align: right;
+}
+
+.server-message .message-content {
+  background-color: #cbe1fd;
+  align-self: flex-start;
+  text-align: left;
+}
+
+.input-box {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.input-box input {
+  flex: 1;
+  height: 40px;
+  font-size: 1.1rem;
+}
+
+.input-box button {
+  margin-left: 5px;
+  height: 42px;
+  font-size: 1.1rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+  font-size: large;
+  font-weight: bolder;
+}
+
+.chat-box::-webkit-scrollbar {
+  display: none;
+}
